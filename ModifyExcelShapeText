@@ -1,0 +1,33 @@
+Sub AddBToFirstLine()
+
+    Dim shp As Shape
+    Dim txt As String
+    Dim lines() As String
+    Dim newLine As String
+    Dim i As Long
+    
+    For Each shp In ActiveSheet.Shapes
+        If shp.Type = msoShapeRectangle Then
+            'Get the text in the text box
+            txt = shp.TextFrame.Characters.Text
+            'Split the text by line
+            lines = Split(txt, vbLf)
+            'Add "b" to the end of first line
+            For i = 0 To 2
+                If i <= UBound(lines) Then
+                    If i = 0 Then
+                        newLine = Trim(lines(i)) & "b"
+                    Else
+                        newLine = Trim(lines(i))
+                    End If
+                    lines(i) = newLine
+                End If
+            Next i
+            'Write the modified text back into the text box
+            shp.TextFrame.Characters.Text = Join(lines, vbLf)
+            'Set the color of the first 9 characters of the first line of text to green
+            shp.TextFrame.Characters(Start:=0, Length:=9).Font.Color = RGB(0, 255, 0)
+        End If
+    Next shp
+
+End Sub
