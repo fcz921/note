@@ -1,0 +1,13 @@
+Sub AddBAndSetColor()
+    Dim selectedRange As Range
+    Set selectedRange = Selection 'Get the currently selected range of cells
+    
+    'Iterate through each cell in the selected range
+    For Each cell In selectedRange
+        'Add the letter "b" to the end of the cell
+        cell.Value = cell.Value & "b"
+        
+        'Set the cell's font color to red
+        cell.Font.Color = RGB(255, 0, 0)
+    Next cell
+End Sub
